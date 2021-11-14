@@ -1,0 +1,7 @@
+.banner-background-image{
+    background: url("../../../images/banner2.jpg");
+    height: 75vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

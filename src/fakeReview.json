@@ -1,0 +1,30 @@
+[
+    {
+        "name": "Anderson",
+        "Occupation": "Student",
+        "image": "https://i.ibb.co/QHGXyL5/imagefor-Review1.jpg",
+        "Review": "5",
+        "says": "I wonder if dinosaurs like Malkovich that nobody really likes, has gambling debts? If not, then why not just leave us alone and spare us with the unbearable personality and bad acting?"
+    },
+    {
+        "name": "williamson",
+        "Occupation": "web-developer",
+        "image": "https://i.ibb.co/qpfTCRf/imagefor-Review6.jpg",
+        "Review": "4.5",
+        "says": "I will spare you the laughable details.. this movie sucked BIG TIME! Probably the WORST I've ever seen. It was so bad even my parakeet told me it sucked. The other reviews (most of them are spot on) Don't waste your money"
+    },
+    {
+        "name": "sakib khan",
+        "Occupation": "actor",
+        "image": "https://i.ibb.co/GFnkN8Q/imagefor-Review5.jpg",
+        "Review": "4.8",
+        "says": "This is a terrible movie. Terrible plot, terrible script, terrible acting/directing, terrible in every way imaginable. The only way for this movie to have been saved was if they asked Tommy Wiseau to rewrite and direct it."
+    },
+    {
+        "name": "tamim iqbal khan",
+        "Occupation": "cricketer",
+        "image": "https://i.ibb.co/QKSPd48/imagefor-Review4.jpg",
+        "Review": "3.8",
+        "says": "Jonathan Rhys Meyers was in another terrible movie I have watched in the last week, American Night. This movie is actually worse. It is also worse than The Many Saints of Newark, which was extremely disappointing."
+    }
+]

@@ -1,0 +1,23 @@
+.abc{
+    background: #7B7B7B;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    color:black;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    margin-right: 5px;
+}
+.abc:hover{
+    background-color: tomato;
+    color: wheat;
+}
+.abc-span{
+    color: #7B7B7B;
+}
+.contact-bar-right-side{
+    display: flex;
+    align-items: center;
+    margin-right: 2%;
+}
