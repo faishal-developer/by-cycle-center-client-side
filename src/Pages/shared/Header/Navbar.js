@@ -42,8 +42,8 @@ export default function Navbar() {
         setState( { ...state, [anchor]: open } );
     };
 
-    const headerRoute = ['home', 'products', 'services', 'aboutus']
-    const navItem = ['HOME', 'PRODUCTS', 'SERVICES', 'ABOUT US']
+    const headerRoute = ['home', 'products', 'aboutus']
+    const navItem = ['HOME', 'PRODUCTS', 'ABOUT US']
     if ( user?.displayName ) {
         headerRoute.push( 'dashboard' )
         navItem.push( 'DASHBOARD' )

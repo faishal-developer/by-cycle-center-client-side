@@ -10,6 +10,7 @@ import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
 import { Card, CardContent, Rating } from '@mui/material';
 import './Review.css'
+import SkeletonComponent from '../../shared/Skeleton/Skeleton';
 
 const AutoPlaySwipeableViews = autoPlay( SwipeableViews );
 
@@ -18,12 +19,16 @@ function ReviewCarousel() {
     const [reviews, setReviews] = React.useState( [] )
     const theme = useTheme();
     const [activeStep, setActiveStep] = React.useState( 0 );
+    const [isLoading, setIsLoading] = React.useState( true )
     const maxSteps = reviews?.length;
 
     React.useEffect( () => {
-        fetch( 'https://hidden-forest-46700.herokuapp.com/reviews' )
+        fetch( 'http://localhost:5000/reviews' )
             .then( ( res ) => res.json() )
-            .then( data => setReviews( data ) )
+            .then( data => {
+                setReviews( data )
+                setIsLoading( false )
+            } )
             .catch( e => alert( e.message ) )
     }, [] )
     const handleNext = () => {
@@ -37,6 +42,10 @@ function ReviewCarousel() {
     const handleStepChange = ( step ) => {
         setActiveStep( step );
     };
+
+    if ( isLoading && reviews.length < 1 ) {
+        return <SkeletonComponent service={false} />
+    }
 
     return (
         <Box sx={{ maxWidth: 600, mx: 'auto', my: 5, flexGrow: 1 }}>

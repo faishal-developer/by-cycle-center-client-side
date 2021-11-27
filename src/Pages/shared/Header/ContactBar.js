@@ -17,7 +17,7 @@ const ContactBar = () => {
                         variant="caption"
                         display='inline'
                         sx={{
-                            color: 'black',
+                            color: 'white',
                             fontWeight: 'bold',
                             fontSize: '22px',
                         }}>

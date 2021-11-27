@@ -3,13 +3,13 @@ import React from 'react';
 
 const Footer = () => {
     return (
-        <Grid container sx={{ p: 3, bgcolor: "#141616", borderTop: '1px solid' }} spacing={2}>
-            <Grid item xs={6}>
+        <Grid container sx={{ display: 'flex', justifyContent: 'space-between', p: 3, bgcolor: "#141616", borderTop: '1px solid' }} spacing={2}>
+            <div >
                 <span style={{ color: 'grey' }}>Copyright &copy; 2021</span>
-            </Grid>
-            <Grid item xs={6}>
+            </div>
+            <div >
                 <span style={{ color: 'grey' }}>All Right Reserved-by mohammed faishal</span>
-            </Grid>
+            </div>
         </Grid>
     );
 };

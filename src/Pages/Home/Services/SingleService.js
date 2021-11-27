@@ -7,14 +7,15 @@ import { Button, CardActionArea, CardActions, Grid } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 
 export default function ActionAreaCard( props ) {
-    const { productBrand, description, image, price, currency, _id } = props.cycle
+    const { productBrand, description, image, price, imgb24, currency, _id } = props.cycle
+    let picture = imgb24 ? `data:image/png;base64,${image}` : image
     return (
-        <Grid item xs={4}>
-            <Card sx={{ maxWidth: 345 }}>
+        <Grid item xs={12} sm={6} md={4}>
+            <Card>
                 <CardActionArea>
                     <CardMedia
                         component="img"
-                        image={image}
+                        image={picture}
                         alt="green iguana"
                     />
                     <CardContent>

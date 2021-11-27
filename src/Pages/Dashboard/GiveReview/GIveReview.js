@@ -22,7 +22,7 @@ const GIveReview = () => {
         let newReview = { ...userReview }
         newReview.name = user?.displayName
         console.log( newReview )
-        fetch( 'https://hidden-forest-46700.herokuapp.com/reviews', {
+        fetch( 'http://localhost:5000/reviews', {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify( newReview )
@@ -54,7 +54,7 @@ const GIveReview = () => {
                             type="number"
                             sx={{ width: '100%', my: 1 }}
                             label="rating"
-                            name="rating"
+                            name="Review"
                             variant="filled"
                         />
                         <TextField

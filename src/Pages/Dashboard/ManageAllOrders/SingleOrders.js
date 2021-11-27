@@ -8,6 +8,11 @@ import { Button } from '@mui/material';
 
 export default function SingleOrders( props ) {
 
+
+
+    // if ( user?.role !== 'admin' ) {
+    //     return
+    // }
     return (
         <Card sx={{ display: 'flex' }}>
             <Box sx={{ display: 'flex', flexDirection: 'column' }}>
@@ -19,13 +24,17 @@ export default function SingleOrders( props ) {
                         Product Id : {props?.order?.productId}
                     </Typography>
                     <Typography variant="subtitle1" color="text.secondary" component="div">
-                        Ordered person : {props?.order?.name}
+                        Ordered person : {props?.order?.userName}
                     </Typography>
                     <Typography variant="subtitle1" color="text.secondary" component="div">
                         Product person email : {props?.order?.email}
                     </Typography>
-                    {props.admin && <Button>{'pending'}</Button>}
-                    <Button>Delete Order</Button>
+                    {props.admin && <Button
+                        onClick={() => props.handleUpdateStatus( props?.order?._id )}
+                    >
+                        {props?.order?.status ? <span style={{ color: 'green' }}>Shipted</span> : 'pending'}
+                    </Button>}
+                    <Button onClick={() => props.handleDelete( props?.order?._id )}>Delete Order</Button>
                 </CardContent>
             </Box>
             <CardMedia

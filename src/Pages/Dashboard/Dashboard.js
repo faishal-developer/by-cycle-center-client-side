@@ -70,7 +70,7 @@ function Dashboard( props ) {
                     </ListItem>
                 </Link>
                 {['My Orders', 'Payment', 'Review'].map( ( text, index ) => (
-                    <NavLink activeStyle={{ color: 'tomato' }} key={text} to={`${url}/${dashboardRoutes[index]}`}>
+                    <NavLink activeStyle={{ color: 'tomato' }} key={index} to={`${url}/${dashboardRoutes[index]}`}>
                         <ListItem button>
                             <ListItemIcon>
                                 {userDashBoardIcon[index]}
@@ -83,8 +83,8 @@ function Dashboard( props ) {
             <Divider />
             <List>
                 {( !isLoading && user.role === 'admin' ) && ['Manage All Products', 'Make Admin', 'Add Product'].map( ( text, index ) => (
-                    <NavLink activeStyle={{ color: 'tomato' }} to={`${url}/${dashboardRoutes[index + 3]}`}>
-                        <ListItem button key={text}>
+                    <NavLink key={text} activeStyle={{ color: 'tomato' }} to={`${url}/${dashboardRoutes[index + 3]}`}>
+                        <ListItem button>
                             <ListItemIcon>
                                 {adminDashBoardIcon[index]}
                             </ListItemIcon>

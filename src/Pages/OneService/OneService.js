@@ -1,6 +1,6 @@
 import { Button, Card, CardContent, CardMedia, Grid, TextField, Typography } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useParams, useHistory } from 'react-router';
 import { MyContext } from '../Hooks/AuthProvider';
 
 const OneService = () => {
@@ -8,6 +8,7 @@ const OneService = () => {
     const { productsId } = useParams()
     const [order, setOrder] = useState( {} )
     const { user } = useContext( MyContext )
+    const history = useHistory()
 
     const handleChange = ( e ) => {
         let newOrder = { ...order };
@@ -23,7 +24,8 @@ const OneService = () => {
         newOrder.productName = product.productBrand;
         newOrder.productId = productsId;
         newOrder.image = product.image
-        fetch( `https://hidden-forest-46700.herokuapp.com/orders`, {
+        newOrder.price = product.price
+        fetch( `http://localhost:5000/orders`, {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify( newOrder )
@@ -32,6 +34,7 @@ const OneService = () => {
             .then( data => {
                 if ( data?.insertedId ) {
                     alert( 'orderd successfully' )
+                    history.push( '/dashboard/payment' )
                 }
             } )
             .catch( err => {
@@ -43,7 +46,7 @@ const OneService = () => {
     }
 
     useEffect( () => {
-        fetch( `https://hidden-forest-46700.herokuapp.com/bycycles/${productsId}` )
+        fetch( `http://localhost:5000/bycycles/${productsId}` )
             .then( res => res.json() )
             .then( data => setProduct( data ) )
             .catch( e => alert( e.message ) )
