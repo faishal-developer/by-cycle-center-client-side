@@ -9,3 +9,11 @@
 * dashboard for user and admin panel for admin also available
 
 # Use Case
+* an user can see all bycycle and can placeorder
+* an user can pay.
+* before placeorder and payment process he have to login
+* an user can see dashboard
+* an user can review about us and it will show in home page
+* For an admin there is a admin panel
+* an admin can add a product 
+* an admin can make another one admin and can manage all orders
