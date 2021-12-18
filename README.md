@@ -1,5 +1,5 @@
 # ByCycle-Center web app using react
-[Live Link](https://by-cycle-center.web.app/dashboard/payment)
+[Live Link](https://by-cycle-center.web.app)
 
 # Speciality
 * Full Stack project
