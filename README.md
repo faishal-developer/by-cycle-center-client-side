@@ -17,3 +17,4 @@
 * For an admin there is a admin panel
 * an admin can add a product 
 * an admin can make another one admin and can manage all orders
+* please log in with (email:admin@admin.com password:123456) to sea admin panel
