@@ -1,37 +1,45 @@
 import { Button, Grid, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React, { useState, useContext } from 'react';
+import CustomizedDialogs from '../../Dialog/Dialog';
 import { MyContext } from '../../Hooks/AuthProvider';
 
 const GIveReview = () => {
     const [userReview, setUserReview] = useState()
-    const { user } = useContext( MyContext )
+    const { user } = useContext(MyContext)
+    const [open, setOpen] = React.useState([false, '', '']);
 
-    const handleChange = ( e ) => {
+    const handleClose = () => {
+        setOpen(false, '');
+    };
+
+    const handleChange = (e) => {
         let changedReview = { ...userReview };
         changedReview[e.target.name] = e.target.value
-        setUserReview( changedReview )
+        setUserReview(changedReview)
     }
 
-    const handleSubmit = ( e ) => {
+    const handleSubmit = (e) => {
         e.preventDefault()
-        if ( Number( userReview.rating ) >= 6 || Number( userReview.rating ) <= 0 ) {
-            alert( 'Give Number between 1 to 5' )
+        if (Number(userReview.Review) >= 6 || Number(userReview.Review) <= 0) {
+            setOpen([true, 'Error', 'Give Number between 1 to 5'])
+
             return
         }
         let newReview = { ...userReview }
         newReview.name = user?.displayName
-        console.log( newReview )
-        fetch( 'http://localhost:5000/reviews', {
+        console.log(newReview)
+        fetch('https://hidden-forest-46700.herokuapp.com/reviews', {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
-            body: JSON.stringify( newReview )
-        } )
-            .then( res => res.json() )
-            .then( data => alert( 'review added' ) )
-            .catch( e => alert( e.message ) )
+            body: JSON.stringify(newReview)
+        })
+            .then(res => res.json())
+            .then(data => setOpen([true, 'successfull', 'review added']))
+            .catch(e => setOpen([true, 'Error', e.message]))
         e.target.reset()
     }
+
     return (
         <Box >
             <Grid container spacing={2}>
@@ -72,6 +80,8 @@ const GIveReview = () => {
                 <Grid item xs={3}>
                 </Grid>
             </Grid>
+            {open && <CustomizedDialogs handleClose={handleClose} open={open[0]} heading={open[1]} description={open[2]} />}
+
         </Box>
     );
 };

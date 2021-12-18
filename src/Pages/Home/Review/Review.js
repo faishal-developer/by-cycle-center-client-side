@@ -12,38 +12,38 @@ import { Card, CardContent, Rating } from '@mui/material';
 import './Review.css'
 import SkeletonComponent from '../../shared/Skeleton/Skeleton';
 
-const AutoPlaySwipeableViews = autoPlay( SwipeableViews );
+const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 
 function ReviewCarousel() {
-    const [reviews, setReviews] = React.useState( [] )
+    const [reviews, setReviews] = React.useState([])
     const theme = useTheme();
-    const [activeStep, setActiveStep] = React.useState( 0 );
-    const [isLoading, setIsLoading] = React.useState( true )
+    const [activeStep, setActiveStep] = React.useState(0);
+    const [isLoading, setIsLoading] = React.useState(true)
     const maxSteps = reviews?.length;
 
-    React.useEffect( () => {
-        fetch( 'http://localhost:5000/reviews' )
-            .then( ( res ) => res.json() )
-            .then( data => {
-                setReviews( data )
-                setIsLoading( false )
-            } )
-            .catch( e => alert( e.message ) )
-    }, [] )
+    React.useEffect(() => {
+        fetch('https://hidden-forest-46700.herokuapp.com/reviews')
+            .then((res) => res.json())
+            .then(data => {
+                setReviews(data)
+                setIsLoading(false)
+            })
+            .catch(e => console.log(e.message))
+    }, [])
     const handleNext = () => {
-        setActiveStep( ( prevActiveStep ) => prevActiveStep + 1 );
+        setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
 
     const handleBack = () => {
-        setActiveStep( ( prevActiveStep ) => prevActiveStep - 1 );
+        setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
 
-    const handleStepChange = ( step ) => {
-        setActiveStep( step );
+    const handleStepChange = (step) => {
+        setActiveStep(step);
     };
 
-    if ( isLoading && reviews.length < 1 ) {
+    if (isLoading && reviews.length < 1) {
         return <SkeletonComponent service={false} />
     }
 
@@ -56,9 +56,9 @@ function ReviewCarousel() {
                 onChangeIndex={handleStepChange}
                 enableMouseEvents
             >
-                {reviews.map( ( review, index ) => (
+                {reviews.map((review, index) => (
                     <div key={review._id}>
-                        {Math.abs( activeStep - index ) <= 2 ? (
+                        {Math.abs(activeStep - index) <= 2 ? (
                             <Card sx={{ textAlign: 'center', minWidth: 275 }}>
                                 <img
                                     component="img"
@@ -77,7 +77,7 @@ function ReviewCarousel() {
                                     </blockquote>
                                     <Rating
                                         name="text-feedback"
-                                        value={Number( review?.Review )}
+                                        value={Number(review?.Review)}
                                         readOnly
                                         precision={0.1}
 
@@ -87,7 +87,7 @@ function ReviewCarousel() {
 
                         ) : null}
                     </div>
-                ) )}
+                ))}
             </AutoPlaySwipeableViews>
             <MobileStepper
                 steps={maxSteps}

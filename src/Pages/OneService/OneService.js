@@ -1,22 +1,28 @@
 import { Button, Card, CardContent, CardMedia, Grid, TextField, Typography } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react';
 import { useParams, useHistory } from 'react-router';
+import CustomizedDialogs from '../Dialog/Dialog';
 import { MyContext } from '../Hooks/AuthProvider';
 
 const OneService = () => {
-    const [product, setProduct] = useState( {} )
+    const [product, setProduct] = useState({})
     const { productsId } = useParams()
-    const [order, setOrder] = useState( {} )
-    const { user } = useContext( MyContext )
+    const [order, setOrder] = useState({})
+    const { user } = useContext(MyContext)
     const history = useHistory()
+    const [open, setOpen] = React.useState([false, '', '']);
 
-    const handleChange = ( e ) => {
+    const handleClose = () => {
+        setOpen(false, '');
+    };
+
+    const handleChange = (e) => {
         let newOrder = { ...order };
         newOrder[e.target.name] = e.target.value
-        setOrder( newOrder )
+        setOrder(newOrder)
     }
 
-    const handleSubmit = ( e ) => {
+    const handleSubmit = (e) => {
         e.preventDefault()
         let newOrder = { ...order };
         newOrder.userName = user.displayName;
@@ -25,33 +31,33 @@ const OneService = () => {
         newOrder.productId = productsId;
         newOrder.image = product.image
         newOrder.price = product.price
-        fetch( `http://localhost:5000/orders`, {
+        fetch(`https://hidden-forest-46700.herokuapp.com/orders`, {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
-            body: JSON.stringify( newOrder )
-        } )
-            .then( res => res.json() )
-            .then( data => {
-                if ( data?.insertedId ) {
-                    alert( 'orderd successfully' )
-                    history.push( '/dashboard/payment' )
+            body: JSON.stringify(newOrder)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data?.insertedId) {
+                    setOpen([true, 'successfull', 'orderd successfully'])
+                    history.push('/dashboard/payment')
                 }
-            } )
-            .catch( err => {
-                alert( err.message )
-            } )
-            .finally( () => {
+            })
+            .catch(err => {
+                setOpen([true, 'Error', err.message])
+            })
+            .finally(() => {
                 e.target.reset()
-            } )
+            })
     }
 
-    useEffect( () => {
-        fetch( `http://localhost:5000/bycycles/${productsId}` )
-            .then( res => res.json() )
-            .then( data => setProduct( data ) )
-            .catch( e => alert( e.message ) )
-    }, [productsId] )
-    console.log( product );
+    useEffect(() => {
+        fetch(`https://hidden-forest-46700.herokuapp.com/bycycles/${productsId}`)
+            .then(res => res.json())
+            .then(data => setProduct(data))
+            .catch(e => setOpen([true, 'Error', e.message]))
+    }, [productsId])
+    console.log(product);
     return (
         <Grid sx={{ my: 5 }} container spacing={2}>
             <Grid xs={1}></Grid>
@@ -107,7 +113,7 @@ const OneService = () => {
                 </form>
             </Grid>
             <Grid item xs={1}>
-
+                {open && <CustomizedDialogs handleClose={handleClose} open={open[0]} heading="Error" description={open[1]} />}
             </Grid>
         </Grid>
     );

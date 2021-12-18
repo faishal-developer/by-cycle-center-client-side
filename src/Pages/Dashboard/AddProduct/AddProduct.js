@@ -2,59 +2,64 @@ import { Button, Input, Grid, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import React, { useState } from 'react';
-import { useHistory } from 'react-router';
+// import { useHistory } from 'react-router';
 import useAlert from '../../Hooks/useAlert';
+import CustomizedDialogs from '../../Dialog/Dialog';
 
 const AddProduct = () => {
-    const [cycle, setCycle] = useState( {} )
-    const history = useHistory()
+    const [cycle, setCycle] = useState({})
+    // const history = useHistory()
     const { muiAlert } = useAlert()
-    const [alertNow, setAlertNow] = useState( {} )
+    const [alertNow, setAlertNow] = useState({})
+    const [open, setOpen] = React.useState([false, '', '']);
 
+    const handleClose = () => {
+        setOpen(false, '');
+    };
 
-    const handleChange = ( e, isFile ) => {
+    const handleChange = (e, isFile) => {
         let changedCycle = { ...cycle };
-        if ( isFile ) {
+        if (isFile) {
             changedCycle[e.target.name] = e.target.files[0]
-            setCycle( changedCycle )
+            setCycle(changedCycle)
             return
         }
         changedCycle[e.target.name] = e.target.value
-        setCycle( changedCycle )
+        setCycle(changedCycle)
     }
 
-    const handleSubmit = ( e ) => {
+    const handleSubmit = (e) => {
         e.preventDefault()
-        if ( !cycle.image ) {
-            alert( 'please insert a image' )
+        if (!cycle.image) {
+            setOpen([true, 'Error', 'Please Add An Image'])
             return
         }
         const formData = new FormData();
-        formData.append( 'currency', '$' )
-        formData.append( 'imgb24', true )
-        for ( let x in cycle ) {
-            formData.append( x, cycle[x] )
+        formData.append('currency', '$')
+        formData.append('imgb24', true)
+        for (let x in cycle) {
+            formData.append(x, cycle[x])
         }
-        fetch( 'http://localhost:5000/bycycles', {
+        fetch('https://hidden-forest-46700.herokuapp.com/bycycles', {
             method: "POST",
             body: formData
-        } )
-            .then( res => res.json() )
-            .then( data => {
-                console.log( data )
-                if ( data.insertedId ) {
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.insertedId) {
                     let alertObject = { isTrue: true, message: 'Product added' }
-                    setAlertNow( alertObject )
+                    setAlertNow(alertObject)
                 } else {
                     let alertObject = { isTrue: false, message: 'product not added' }
-                    setAlertNow( alertObject )
+                    setAlertNow(alertObject)
                 }
                 //history.push( '/products' )
-            } )
-            .catch( e => {
+            })
+            .catch(e => {
                 let alertObject = { isTrue: false, message: e.message }
-                setAlertNow( alertObject )
-            } )
+                setAlertNow(alertObject)
+            })
         e.target.reset()
     }
     return (
@@ -96,18 +101,20 @@ const AddProduct = () => {
                             id="contained-button-file"
                             type="file"
                             name='image'
-                            onChange={( e ) => handleChange( e, true )}
+                            onChange={(e) => handleChange(e, true)}
                         />
                         <br />
                         <Button sx={{ width: '100%', my: 1 }} variant="contained" type="submit">Add An Product</Button>
                     </form>
                     {
-                        alertNow?.message && muiAlert( alertNow )
+                        alertNow?.message && muiAlert(alertNow)
                     }
                 </Grid>
                 <Grid item xs={1}>
                 </Grid>
             </Grid>
+            {open && <CustomizedDialogs handleClose={handleClose} open={open[0]} heading={open[1]} description={open[2]} />}
+
         </Box>
     );
 };

@@ -9,6 +9,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { CircularProgress, Drawer, List, ListItem, ListItemText } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { MyContext } from '../../Hooks/AuthProvider';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 export default function Navbar() {
     const { isLoading, user, logOut } = React.useContext( MyContext )
@@ -22,7 +23,7 @@ export default function Navbar() {
     const toggleUser = () => {
         console.log( user );
         if ( user?.displayName ) {
-            return <div>
+            return <div style={{ display: 'flex', alignItems: 'center' }}>
                 <span style={{ color: 'white', padding: '10px', fontWeight: 'bold' }}> {user.displayName}</span>
                 <button onClick={logOut} color="inherit">Log Out</button>
             </div>

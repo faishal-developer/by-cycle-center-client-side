@@ -4,37 +4,37 @@ import React, { useState } from 'react';
 import useAlert from '../../Hooks/useAlert';
 
 
-const Checkout = ( props ) => {
+const Checkout = (props) => {
     const stripe = useStripe()
     const elements = useElements()
-    const [error, setError] = useState( {} )
+    const [error, setError] = useState({})
     const { muiAlert } = useAlert()
-    const handleSubmit = async ( e ) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
 
-        if ( !stripe || !elements ) {
+        if (!stripe || !elements) {
             return;
         }
 
-        const card = elements.getElement( CardElement );
-        if ( card == null ) {
+        const card = elements.getElement(CardElement);
+        if (card == null) {
             return;
         }
 
         // Use your card Element with other Stripe.js APIs
-        const { error, paymentMethod } = await stripe.createPaymentMethod( {
+        const { error, paymentMethod } = await stripe.createPaymentMethod({
             type: 'card',
             card,
-        } );
-        console.log( error );
+        });
+        console.log(error);
 
-        if ( error ) {
+        if (error) {
             let er = { message: error.message, isTrue: false }
-            setError( er );
+            setError(er);
         } else {
             let er = { message: 'Payment Successfull', isTrue: true }
-            setError( er );
+            setError(er);
         }
     }
     return (
@@ -63,7 +63,7 @@ const Checkout = ( props ) => {
                 </div>
             </form>
             {
-                error.message && muiAlert( error )
+                error.message && muiAlert(error)
             }
         </div>
     );

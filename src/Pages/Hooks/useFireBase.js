@@ -8,101 +8,101 @@ initializeFirebaseApp()
 const auth = getAuth();
 
 const useFireBase = () => {
-    const [user, setUser] = useState( {} )
-    const [isLoading, setIsLoading] = useState( true )
+    const [user, setUser] = useState({})
+    const [isLoading, setIsLoading] = useState(true)
 
-    const addUserOnMongodb = ( email, name ) => {
-        fetch( `http://localhost:5000/users`, {
+    const addUserOnMongodb = (email, name) => {
+        fetch(`https://hidden-forest-46700.herokuapp.com/users`, {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
-            body: JSON.stringify( { email, name } )
-        } )
-            .then( res => res.json() )
-            .then( data => { } )
-            .catch( e => alert( e.message ) )
+            body: JSON.stringify({ email, name })
+        })
+            .then(res => res.json())
+            .then(data => { })
+            .catch(e => alert(e.message))
     }
 
-    const findUserFromDb = ( email, displayName ) => {
-        setIsLoading( true )
+    const findUserFromDb = (email, displayName) => {
+        setIsLoading(true)
 
-        fetch( `http://localhost:5000/users/${email}` )
-            .then( res => res.json() )
-            .then( data => {
+        fetch(`https://hidden-forest-46700.herokuapp.com/users/${email}`)
+            .then(res => res.json())
+            .then(data => {
                 let modifiUser = { ...data }
                 modifiUser['displayName'] = displayName
                 let role = data?.role ? data.role : 'user'
                 modifiUser['role'] = role;
-                console.log( modifiUser );
-                setUser( modifiUser )
-            } )
-            .catch( e => alert( e.message ) )
-            .finally( () => setIsLoading( false ) )
+                console.log(modifiUser);
+                setUser(modifiUser)
+            })
+            .catch(e => console.log(e.message))
+            .finally(() => setIsLoading(false))
     }
 
-    const createUserWithPassword = ( email, password, name, history ) => {
-        setIsLoading( true )
-        createUserWithEmailAndPassword( auth, email, password )
-            .then( res => {
-                updateProfile( auth.currentUser, {
+    const createUserWithPassword = (email, password, name, history) => {
+        setIsLoading(true)
+        createUserWithEmailAndPassword(auth, email, password)
+            .then(res => {
+                updateProfile(auth.currentUser, {
                     displayName: name
-                } ).then( ( result ) => {
+                }).then((result) => {
                     let updateUser = { ...res.user }
-                    addUserOnMongodb( email, name )
+                    addUserOnMongodb(email, name)
                     updateUser['displayName'] = name
-                    setUser( updateUser )
-                    history.push( '/home' )
+                    setUser(updateUser)
+                    history.push('/home')
 
-                } ).finally( ( error ) => {
-                    setIsLoading( false )
-                } )
+                }).finally((error) => {
+                    setIsLoading(false)
+                })
 
-            } )
-            .catch( e => {
+            })
+            .catch(e => {
                 let error = {}
                 error.message = e.message;
-                setUser( error )
-                setIsLoading( false )
-            } )
+                setUser(error)
+                setIsLoading(false)
+            })
     }
-    const signInWithPassword = ( email, password, history, url ) => {
-        setIsLoading( true )
-        signInWithEmailAndPassword( auth, email, password )
-            .then( res => {
-                setUser( res.user )
-                findUserFromDb( res.user.email, res.user.displayName )
-                history.push( `${url}` )
-            } )
-            .catch( e => {
+    const signInWithPassword = (email, password, history, url) => {
+        setIsLoading(true)
+        signInWithEmailAndPassword(auth, email, password)
+            .then(res => {
+                setUser(res.user)
+                findUserFromDb(res.user.email, res.user.displayName)
+                history.push(`${url}`)
+            })
+            .catch(e => {
                 let error = {}
                 error.message = e.message;
-                setUser( error )
-                setIsLoading( false )
-            } )
+                setUser(error)
+                setIsLoading(false)
+            })
     }
 
     const logOut = () => {
-        signOut( auth )
-            .then( () => {
-                setUser( {} )
-            } )
-            .catch( e => {
+        signOut(auth)
+            .then(() => {
+                setUser({})
+            })
+            .catch(e => {
                 let error = {}
                 error.message = e.message;
-                setUser( error )
-            } )
+                setUser(error)
+            })
     }
 
-    useEffect( () => {
-        onAuthStateChanged( auth, ( user ) => {
-            if ( user ) {
-                findUserFromDb( user.email, user.displayName )
-                setUser( user )
-                setIsLoading( false )
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                findUserFromDb(user.email, user.displayName)
+                setUser(user)
+                setIsLoading(false)
             } else {
-                setIsLoading( false )
+                setIsLoading(false)
             }
-        } );
-    }, [] )
+        });
+    }, [])
 
     return {
         user,

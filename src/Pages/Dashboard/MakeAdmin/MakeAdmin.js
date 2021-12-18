@@ -19,7 +19,7 @@ const MakeAdmin = () => {
     const handleSubmit = ( e ) => {
         e.preventDefault()
         console.log( user )
-        fetch( `http://localhost:5000/users`, {
+        fetch( `https://hidden-forest-46700.herokuapp.com/users`, {
             method: "PUT",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify( { email: user.email } )
