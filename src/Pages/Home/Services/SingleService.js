@@ -6,7 +6,7 @@ import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions, Grid } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 
-export default function ActionAreaCard( props ) {
+export default function ActionAreaCard(props) {
     const { productBrand, description, image, price, imgb24, currency, _id } = props.cycle
     let picture = imgb24 ? `data:image/png;base64,${image}` : image
     return (
@@ -23,7 +23,7 @@ export default function ActionAreaCard( props ) {
                             {productBrand}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
-                            {props.shortdes ? description.substring( 1, 50 ) : description}...
+                            {props.shortdes ? description.substring(1, 50) : description}...
                         </Typography>
                         <Typography sx={{ color: "primary.main" }} gutterBottom variant="h6" component="div">
                             {currency}{price} only
@@ -32,6 +32,7 @@ export default function ActionAreaCard( props ) {
                     <CardActions>
 
                         <NavLink to={`/products/${_id}`}><Button variant="contained" size="small">Purchase</Button></NavLink>
+                        <button >reduce price</button>
                     </CardActions>
                 </CardActionArea>
             </Card>

@@ -40,7 +40,7 @@ const AddProduct = () => {
         for (let x in cycle) {
             formData.append(x, cycle[x])
         }
-        fetch('https://hidden-forest-46700.herokuapp.com/bycycles', {
+        fetch('https://by-cycle-center-faishal-developer.vercel.app/bycycles', {
             method: "POST",
             body: formData
         })

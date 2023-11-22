@@ -10,7 +10,7 @@ const useFindOrder = () => {
 
 
     const FetchOrder = () => {
-        fetch('https://hidden-forest-46700.herokuapp.com/getOrders', {
+        fetch('https://by-cycle-center-faishal-developer.vercel.app/getOrders', {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify({ email: user.email })

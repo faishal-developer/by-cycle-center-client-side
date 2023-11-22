@@ -12,7 +12,7 @@ const useFireBase = () => {
     const [isLoading, setIsLoading] = useState(true)
 
     const addUserOnMongodb = (email, name) => {
-        fetch(`https://hidden-forest-46700.herokuapp.com/users`, {
+        fetch(`https://by-cycle-center-faishal-developer.vercel.app/users`, {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify({ email, name })
@@ -25,7 +25,7 @@ const useFireBase = () => {
     const findUserFromDb = (email, displayName) => {
         setIsLoading(true)
 
-        fetch(`https://hidden-forest-46700.herokuapp.com/users/${email}`)
+        fetch(`https://by-cycle-center-faishal-developer.vercel.app/users/${email}`)
             .then(res => res.json())
             .then(data => {
                 let modifiUser = { ...data }

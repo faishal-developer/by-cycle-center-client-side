@@ -23,7 +23,7 @@ function ReviewCarousel() {
     const maxSteps = reviews?.length;
 
     React.useEffect(() => {
-        fetch('https://hidden-forest-46700.herokuapp.com/reviews')
+        fetch('https://by-cycle-center-faishal-developer.vercel.app/reviews')
             .then((res) => res.json())
             .then(data => {
                 setReviews(data)

@@ -29,7 +29,7 @@ const GIveReview = () => {
         let newReview = { ...userReview }
         newReview.name = user?.displayName
         console.log(newReview)
-        fetch('https://hidden-forest-46700.herokuapp.com/reviews', {
+        fetch('https://by-cycle-center-faishal-developer.vercel.app/reviews', {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(newReview)

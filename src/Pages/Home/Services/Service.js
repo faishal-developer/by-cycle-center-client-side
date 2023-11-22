@@ -16,6 +16,7 @@ const Service = (props) => {
     const handleClose = () => {
         setOpen(false, '');
     };
+    console.log(cycles)
     console.log(value);
     const handleChange = (e) => {
         let newSearchTerm = e.target.value
@@ -24,7 +25,7 @@ const Service = (props) => {
     }
 
     useEffect(() => {
-        fetch('https://hidden-forest-46700.herokuapp.com/bycycles')
+        fetch('https://by-cycle-center-faishal-developer.vercel.app/bycycles')
             .then(res => res.json())
             .then(data => {
                 setCycles(data)
@@ -46,7 +47,8 @@ const Service = (props) => {
             </>
         )
     }
-    console.log(finalCycles);
+
+
     return (
         <Container sx={{ my: 3 }}>
             <Typography variant="h4" sx={{ fontWeight: 'bold', m: 3, textAlign: 'center' }}>By-Cycles</Typography>
@@ -72,7 +74,7 @@ const Service = (props) => {
                 )
             }
             <Grid container spacing={2}>
-                {finalCycles.map((cycle, i) => {
+                {finalCycles.filter((v, i) => v.price < 151).map((cycle, i) => {
                     if (props.home) {
                         if (i <= 5) {
                             return <SingleService

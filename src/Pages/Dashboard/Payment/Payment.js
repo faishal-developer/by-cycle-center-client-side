@@ -15,7 +15,7 @@ const Payment = () => {
     const tax = price * 5 / 100;
     const shipt = myOrders?.length * 2
     useEffect(() => {
-        fetch('https://hidden-forest-46700.herokuapp.com/getOrders', {
+        fetch('https://by-cycle-center-faishal-developer.vercel.app/getOrders', {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify({ email: user.email })

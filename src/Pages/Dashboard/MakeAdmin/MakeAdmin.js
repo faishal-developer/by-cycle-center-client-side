@@ -19,7 +19,7 @@ const MakeAdmin = () => {
     const handleSubmit = ( e ) => {
         e.preventDefault()
         console.log( user )
-        fetch( `https://hidden-forest-46700.herokuapp.com/users`, {
+        fetch( `https://by-cycle-center-faishal-developer.vercel.app/users`, {
             method: "PUT",
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify( { email: user.email } )

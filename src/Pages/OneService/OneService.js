@@ -31,7 +31,7 @@ const OneService = () => {
         newOrder.productId = productsId;
         newOrder.image = product.image
         newOrder.price = product.price
-        fetch(`https://hidden-forest-46700.herokuapp.com/orders`, {
+        fetch(`https://by-cycle-center-faishal-developer.vercel.app/orders`, {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(newOrder)
@@ -52,7 +52,7 @@ const OneService = () => {
     }
 
     useEffect(() => {
-        fetch(`https://hidden-forest-46700.herokuapp.com/bycycles/${productsId}`)
+        fetch(`https://by-cycle-center-faishal-developer.vercel.app/bycycles/${productsId}`)
             .then(res => res.json())
             .then(data => setProduct(data))
             .catch(e => setOpen([true, 'Error', e.message]))

@@ -11,7 +11,7 @@ const ManageAllOrders = () => {
 
     useEffect(() => {
         console.log('manage', 'calling');
-        fetch('https://hidden-forest-46700.herokuapp.com/orders')
+        fetch('https://by-cycle-center-faishal-developer.vercel.app/orders')
             .then(res => res.json())
             .then(data => {
                 setExistingOrders(data)
@@ -23,7 +23,7 @@ const ManageAllOrders = () => {
 
     const handleUpdateStatus = (id) => {
 
-        fetch('https://hidden-forest-46700.herokuapp.com/orders', {
+        fetch('https://by-cycle-center-faishal-developer.vercel.app/orders', {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ status: 'shipted', id: id })

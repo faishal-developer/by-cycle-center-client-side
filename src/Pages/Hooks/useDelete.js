@@ -10,7 +10,7 @@ const useDelete = () => {
 
     const handleDelete = (orderId) => {
 
-        fetch('https://hidden-forest-46700.herokuapp.com/orders', {
+        fetch('https://by-cycle-center-faishal-developer.vercel.app/orders', {
             method: 'DELETE',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id: orderId })
